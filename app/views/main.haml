@@ -1,0 +1,75 @@
+%link(rel="stylesheet" type="text/css" href="/style.css")
+
+%h1 Welcome #{current_user.name}
+%p
+%img(src="good.gif")
+%a{:href => "/logout"} Logout
+%p
+- if message != nil
+  %h2 #{message}
+
+
+%img(src="user.gif") #{current_user.name}
+%p
+%img(src="credits.gif") #{current_user.credits}
+%p
+%p
+Your Items:
+
+%table{:border => 1}
+  %tbody
+    %tr
+      %th{:width => "200"} Name
+      %th{:width => "200"}
+        %img(src="credits.gif")
+      %th{:width => "60"} Active
+  - for item in current_user.all_items
+    %tr
+      %td #{item.name}
+      %td #{item.price}
+      %td
+        - if item.active
+          %img(src="good.gif")
+        - else
+          %img(src="bad.gif")
+
+%p
+  %img(src="users.gif") Other Users:
+%p
+
+- for user in users
+  - if user != current_user
+    %p
+    - if !user.all_items.empty?
+      %table{:border => 1}
+        %tbody
+          %tr
+            %th{:width => "200"} User
+            %th{:width => "200"} Name
+            %th{:width => "200"}
+              %img(src="credits.gif")
+            %th{:width => "60"} Active
+            %th{:width => "60"} Buy
+        - for item in user.all_items
+          %tr
+            %td #{user.name}
+            %td #{item.name}
+            %td #{item.price}
+            %td
+              - if item.active
+                %img(src="good.gif")
+              - else
+                %img(src="bad.gif")
+            %td
+              %form( action="/buy" method="POST" )
+                %input(type="hidden" name="owner" value="#{user.name}")
+                %input(type="hidden" name="item_name" value="#{item.name}")
+                %input(type="hidden" name="price" value="#{item.price}")
+                %input(type="submit" value="buy")
+    - else
+      #{user.name} has no items ;(
+
+
+%hr
+
+  Time: #{time.strftime("%H:%M:%S")}

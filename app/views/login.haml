@@ -1,0 +1,16 @@
+%link(rel="stylesheet" type="text/css" href="/style.css")
+%h1 Login
+
+- if message != nil
+   %h2 #{message}
+
+%form( action="/login" method="POST" )
+   Username
+   %label
+      %input(type="text" name="username")
+   %p
+   Password
+   %label
+      %input(type="password" name="password")
+   %p
+   %input(type="submit" text="submit" value="Login")
