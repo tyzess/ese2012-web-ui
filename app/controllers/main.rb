@@ -7,10 +7,12 @@ class Main < Sinatra::Application
 
     redirect '/login' unless session[:name]
 
+    message = session[:message]
+    session[:message] = nil
     haml :main, :locals => { :time => Time.now ,
                              :users => Traders::User.all,
                              :current_user => Traders::User.with_name(session[:name]),
-                             :message => nil}
+                             :message => message}
   end
 
 end
