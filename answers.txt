@@ -1,0 +1,24 @@
+Q:  Explain how a typical HTTP request is processed with the framework (the request lifecycle)
+
+A:  Sinatra maps the GET and POST HTML-requests with ruby code with help of routes and controllers.
+    In our examples the code don't produce HTML itself, instead it returns a generated view (for Example with haml).
+
+    get "/" do
+        haml :hello_world
+    end
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Q:  Why should GET requests be indempotent?
+
+A:  Because GET should not update/change the model, its only there to get a copy of the current model.
+    If it would change the model, already a simple reload of the current site would have a impact on the model and change it
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Q:  Where should you format data for rendering?
+
+A:  In the "view" files like haml, erb, html or something like that.
+    Because of the MVC Pattern you shouldn't format your view in the controller nor in the model.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
