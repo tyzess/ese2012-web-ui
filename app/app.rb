@@ -6,12 +6,14 @@ require '../app/models/traders/item'
 require '../app/controllers/main'
 require '../app/controllers/authentication'
 require '../app/controllers/transaction'
+require '../app/controllers/profile'
 
 class App < Sinatra::Base
 
   use Authentication
   use Main
   use Transaction
+  use Profile
 
   enable :sessions
   set :public_folder, 'app/public'
@@ -38,6 +40,7 @@ class App < Sinatra::Base
 
     ese.add_item(Traders::Item.create_active("Velo",221))
     ese.add_item(Traders::Item.create_active("GA",2500))
+    ese.add_item(Traders::Item.create("ruby",1))
 
     adrian.add_item(Traders::Item.create("Schwedische Penispumpe",123) )
     adrian.add_item(Traders::Item.create_active("Huhn",22))

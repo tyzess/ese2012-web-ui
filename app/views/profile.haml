@@ -1,0 +1,25 @@
+%link(rel="stylesheet" type="text/css" href="/style.css")
+
+%h1 #{owner.name} Profile
+%a{:href=>"/"} Back
+%p
+Credits: #{owner.credits}
+%p
+#Items:
+
+%table{:border => 1}
+  %tbody
+    %tr
+      %th{:width => "200"} Name
+      %th{:width => "200"}
+        %img(src="../credits.gif")
+      %th{:width => "60"} Active
+  - for item in owner.all_items
+    %tr
+      %td #{item.name}
+      %td #{item.price}
+      %td
+        - if item.active
+          %img(src="../good.gif")
+        - else
+          %img(src="../bad.gif")

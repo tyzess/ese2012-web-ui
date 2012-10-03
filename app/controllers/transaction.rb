@@ -3,9 +3,9 @@ require 'tilt/haml'
 
 class Transaction < Sinatra::Application
 
-  get '/buy' do
-    redirect "/"
-  end
+ #  get '/buy' do
+   # redirect "/"
+  # end
 
   post '/buy' do
     owner_name = params[:owner]
